@@ -1,0 +1,34 @@
+{
+  "name": "simple-electron-app-with-vue-vite",
+  "version": "1.0.0",
+  "main": "./bundle/main/index.js",
+  "scripts": {
+    "clean": "concurrently -g \"npm:clean-dist\" \"npm:clean-bundle\" ",
+    "clean-dist": "node -e \"require('fs-extra').removeSync('./dist/');\"",
+    "clean-bundle": "node -e \"require('fs-extra').removeSync('./bundle/');\"",
+    "pack-electron-structure": "node -e \"require('fs-extra').copySync('src','bundle',{overwrite:true});\"",
+    "pack-renderer-html": "vite build --config src/html/mainRenderer/vite.config.js --base './' --emptyOutDir --outDir ../../../bundle/html/mainRenderer/ src/html/mainRenderer/",
+    "pack":"concurrently -g \"npm:pack-electron-structure\" \"npm:pack-renderer-html\"  ",
+    "build-mac": "electron-builder --mac",
+    "build-win": "electron-builder --win",
+    "build-linux": "electron-builder --linux",
+    "build": "electron-builder -mwl",
+    "dev-vue": "vite --config src/html/mainRenderer/vite.config.js ./src/html/mainRenderer/",
+    "dev-vue-electron": "cross-env MAIN_WINDOW_ENTRY='http://localhost:5173/' electron ./src/main/index.js",
+    "dev-electron": "electron ./src/main/index.js",
+    "dev": "concurrently -g \"npm:dev-vue\" \"npm:dev-vue-electron\""
+  },
+  "author": "Yuan-Yi Chang",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.0",
+    "concurrently": "^7.4.0",
+    "cross-env": "^7.0.3",
+    "electron": "^20.1.1",
+    "electron-builder": "^23.3.3",
+    "fs-extra": "^10.1.0",
+    "vite": "^3.1.0",
+    "vue": "^3.2.39",
+    "vue-router": "^4.1.5"
+  }
+}
