@@ -35,7 +35,7 @@ html: Using Vue.js 3 and Vite
 
 ```
 % source env_nvm.sh 
-Now using node v16.15.1 (npm v8.11.0)
+Now using node v20.9.0 (npm v10.3.0)
 
 % npm run clean
 
